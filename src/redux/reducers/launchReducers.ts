@@ -1,33 +1,27 @@
 import { AnyAction } from 'redux';
 import {
-  GET_ARTICLE_REQUEST,
-  GET_ARTICLE_SUCCESS,
-  GET_ARTICLE_FAIL,
-  PAGINATE_ARTICLE_SUCCESS,
-  GET_SINGLE_ARTICLE_SUCCESS,
-} from '../constants/articleConstants';
+  GET_LAUNCH_REQUEST,
+  GET_LAUNCH_SUCCESS,
+  GET_LAUNCH_FAIL,
+  GET_LAUNCH_BY_ID_REQUEST,
+  GET_LAUNCH_BY_ID_SUCCESS,
+  GET_LAUNCH_BY_ID_FAIL,
+} from '../constants/launchConstants';
 
-export const getArticlesReducer = (state = {}, action: AnyAction) => {
+export const getAllSpaceLaunchesReducer = (state = {}, action: AnyAction) => {
   switch (action.type) {
-    case GET_ARTICLE_REQUEST:
+    case GET_LAUNCH_REQUEST:
       return {
         loading: true,
       };
-    case GET_ARTICLE_SUCCESS:
+    case GET_LAUNCH_SUCCESS:
       return {
         loading: false,
         success: true,
         data: action.payload,
       };
 
-    case PAGINATE_ARTICLE_SUCCESS:
-      return {
-        loading: false,
-        success: true,
-        data: action.payload,
-      };
-
-    case GET_ARTICLE_FAIL:
+    case GET_LAUNCH_FAIL:
       return {
         loading: false,
         error: action.payload,
@@ -38,21 +32,21 @@ export const getArticlesReducer = (state = {}, action: AnyAction) => {
   }
 };
 
-export const getIndividualArticleReducer = (state = {}, action: AnyAction) => {
+export const getSpaceLaunchByIdReducer = (state = {}, action: AnyAction) => {
   switch (action.type) {
-    case GET_ARTICLE_REQUEST:
+    case GET_LAUNCH_BY_ID_REQUEST:
       return {
         loading: true,
       };
 
-    case GET_SINGLE_ARTICLE_SUCCESS:
+    case GET_LAUNCH_BY_ID_SUCCESS:
       return {
         loading: false,
         success: true,
         data: action.payload,
       };
 
-    case GET_ARTICLE_FAIL:
+    case GET_LAUNCH_BY_ID_FAIL:
       return {
         loading: false,
         error: action.payload,

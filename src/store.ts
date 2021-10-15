@@ -2,13 +2,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
-  getArticlesReducer,
-  getIndividualArticleReducer,
-} from './redux/reducers/articleReducers';
+  getAllSpaceLaunchesReducer,
+  getSpaceLaunchByIdReducer,
+} from './redux/reducers/launchReducers';
 
 const reducer = combineReducers({
-  getArticles: getArticlesReducer,
-  getIndividualArticle: getIndividualArticleReducer,
+  getAllSpaceLaunches: getAllSpaceLaunchesReducer,
+  getSpaceLaunchById: getSpaceLaunchByIdReducer,
 });
 
 const middleware = [thunk];
