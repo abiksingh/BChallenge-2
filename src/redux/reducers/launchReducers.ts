@@ -18,7 +18,7 @@ export const getAllSpaceLaunchesReducer = (state = {}, action: AnyAction) => {
       return {
         loading: false,
         success: true,
-        data: action.payload,
+        allLaunch: action.payload,
       };
 
     case GET_LAUNCH_FAIL:
@@ -43,7 +43,7 @@ export const getSpaceLaunchByIdReducer = (state = {}, action: AnyAction) => {
       return {
         loading: false,
         success: true,
-        data: action.payload,
+        launchById: action.payload,
       };
 
     case GET_LAUNCH_BY_ID_FAIL:

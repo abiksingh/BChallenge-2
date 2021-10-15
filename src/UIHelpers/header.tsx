@@ -15,7 +15,7 @@ const Header = () => {
           }}
         >
           <Typography variant="h6" component="div">
-            {`The SpaceX Launch`}
+            {`The SpaceX Launch details App`}
           </Typography>
         </Toolbar>
       </AppBar>

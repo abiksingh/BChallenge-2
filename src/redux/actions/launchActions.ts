@@ -9,7 +9,7 @@ import {
   GET_LAUNCH_BY_ID_FAIL,
 } from '../constants/launchConstants';
 
-export const getAllLaunches = (text: string) => async (dispatch: Dispatch) => {
+export const getAllLaunches = () => async (dispatch: Dispatch) => {
   try {
     dispatch({
       type: GET_LAUNCH_REQUEST,
