@@ -5,11 +5,13 @@ import Spinner from '../UIHelpers/spinner';
 import Header from '../UIHelpers/header';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid, TextField } from '@mui/material';
+import moment from 'moment';
+import Clock from 'react-live-clock';
+
 const LaunchScreen = () => {
   const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ const LaunchScreen = () => {
   const getSpaceLaunchById = useSelector(
     (state: any) => state.getSpaceLaunchById
   );
-  const { loading: LaunchLoading, launchById } = getSpaceLaunchById;
+  const { loading: LaunchLoading, launchById, error } = getSpaceLaunchById;
 
   useEffect(() => {
     dispatch(getAllLaunches());
@@ -36,6 +38,17 @@ const LaunchScreen = () => {
   const onClickHandler = () => {
     dispatch(getLaunchById(id));
   };
+
+  //   const [counter, setCounter] = useState('');
+
+  //   useEffect(() => {
+  //     const timer = setInterval(
+  //       () =>
+  //         setCounter(moment.utc(launchById?.date_utc).local().format('HH:mm:ss')),
+  //       1000
+  //     );
+  //     return () => clearInterval(timer);
+  //   }, [counter]);
 
   return (
     <>
