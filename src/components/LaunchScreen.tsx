@@ -3,19 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllLaunches, getLaunchById } from '../redux/actions/launchActions';
 import Spinner from '../UIHelpers/spinner';
 import Header from '../UIHelpers/header';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Grid, TextField, Container } from '@mui/material';
+
+import {
+  Grid,
+  TextField,
+  Container,
+  Stack,
+  Alert,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+} from '@mui/material';
 import moment from 'moment';
 import { InputFieldWrapper } from '../UIHelpers/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import CircleIcon from '@mui/icons-material/Circle';
 
 const LaunchScreen = () => {
   const dispatch = useDispatch();
+
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const [id, setId] = useState('');
 
   const getAllSpaceLaunches = useSelector(
     (state: any) => state.getAllSpaceLaunches
@@ -27,34 +38,28 @@ const LaunchScreen = () => {
   const getSpaceLaunchById = useSelector(
     (state: any) => state.getSpaceLaunchById
   );
-  const { loading: LaunchLoading, launchById, error } = getSpaceLaunchById;
-
-  const theme = useTheme();
-
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const { launchById, error } = getSpaceLaunchById;
 
   useEffect(() => {
     dispatch(getAllLaunches());
   }, [dispatch]);
 
-  const [id, setId] = useState('');
-  console.log(id);
   console.log(launchById);
 
   const onClickHandler = () => {
     dispatch(getLaunchById(id));
   };
 
-  //   const [counter, setCounter] = useState('');
+  const [counter, setCounter] = useState('');
 
-  //   useEffect(() => {
-  //     const timer = setInterval(
-  //       () =>
-  //         setCounter(moment.utc(launchById?.date_utc).local().format('HH:mm:ss')),
-  //       1000
-  //     );
-  //     return () => clearInterval(timer);
-  //   }, [counter]);
+  useEffect(() => {
+    const timer = setInterval(
+      () =>
+        setCounter(moment.utc(launchById?.date_utc).local().format('HH:mm:ss')),
+      1000
+    );
+    return () => clearInterval(timer);
+  }, [counter, dispatch]);
 
   return (
     <>
@@ -82,7 +87,62 @@ const LaunchScreen = () => {
           </Button>
         </InputFieldWrapper>
 
-        <Typography variant="h5" component="div">
+        {launchById && (
+          <>
+            <Typography mt="2rem" variant="h5" component="div">
+              Search Results
+            </Typography>
+            <Card
+              sx={{ width: '100%', height: '15rem', mt: '1rem' }}
+              variant="outlined"
+            >
+              <CardContent>
+                <Grid
+                  container
+                  columnSpacing={{ xs: 0, sm: 6, md: 6, lg: 11 }}
+                  rowSpacing={{ xs: 2, sm: 12, md: 14, lg: 15 }}
+                >
+                  <Grid item lg={11} md={10} sm={11} xs={12}>
+                    <Typography variant="h5" component="div">
+                      {launchById?.name}
+                    </Typography>
+                  </Grid>
+                  <Grid item lg={1} md={2} sm={1} xs={12}>
+                    <CircleIcon
+                      sx={{
+                        color:
+                          launchById.success === true ? '#78EF9C' : '#F25858',
+                      }}
+                    />
+                  </Grid>
+                  <Grid item lg={9} md={9} sm={8} xs={12}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Elapsed Time Since Launch
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      {counter}
+                    </Typography>
+                  </Grid>
+                  <Grid item lg={3} md={3} sm={4} xs={12}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      {launchById?.id}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </>
+        )}
+
+        {error && (
+          <Stack sx={{ width: '100%', margin: '2rem 0' }} spacing={2}>
+            <Alert variant="outlined" severity="error">
+              Please input valid ID
+            </Alert>
+          </Stack>
+        )}
+
+        <Typography mt="2rem" variant="h5" component="div">
           Past Launches
         </Typography>
 
@@ -97,19 +157,22 @@ const LaunchScreen = () => {
                 alignItems="center"
                 display="flex"
                 key={launch.id}
+                sx={{ marginTop: '1rem' }}
                 item
                 lg={4}
                 md={6}
                 sm={12}
                 xs={12}
-                // sx={albumStyle}
               >
-                <Card sx={{ width: '100%' }} variant="outlined">
+                <Card sx={{ width: '100%', height: '8rem' }} variant="outlined">
                   <CardContent>
                     <Typography variant="h5" component="div">
                       {launch.name}
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    <Typography
+                      sx={{ mb: 1.5, mt: 2.5 }}
+                      color="text.secondary"
+                    >
                       {launch.id}
                     </Typography>
                   </CardContent>
