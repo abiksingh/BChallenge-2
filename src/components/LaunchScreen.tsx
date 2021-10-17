@@ -121,7 +121,7 @@ const LaunchScreen = () => {
               <CardContent>
                 <Grid
                   container
-                  columnSpacing={{ xs: 0, sm: 6, md: 6, lg: 11 }}
+                  columnSpacing={{ xs: 0, sm: 5, md: 5, lg: 11 }}
                   rowSpacing={{ xs: 2, sm: 12, md: 14, lg: 15 }}
                 >
                   <Grid item lg={11} md={10} sm={11} xs={12}>
