@@ -47,7 +47,9 @@ const LaunchScreen = () => {
   console.log(launchById);
 
   const onClickHandler = () => {
-    dispatch(getLaunchById(id));
+    if (id) {
+      dispatch(getLaunchById(id));
+    }
   };
 
   const [counter, setCounter] = useState('');
@@ -116,7 +118,7 @@ const LaunchScreen = () => {
                     />
                   </Grid>
                   <Grid item lg={9} md={9} sm={8} xs={12}>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    <Typography sx={{ mb: 1.5 }}>
                       Elapsed Time Since Launch
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
