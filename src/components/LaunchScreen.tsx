@@ -28,15 +28,34 @@ const LaunchScreen = () => {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const [id, setId] = useState('');
 
+  type GetAllLaunch = {
+    getAllSpaceLaunches: {
+      allLaunch: any;
+      loading: boolean;
+    };
+  };
+
+  type GetLaunchById = {
+    getSpaceLaunchById: {
+      error: any;
+      launchById: any;
+    };
+  };
+
+  type Launches = {
+    id: string;
+    name: string;
+  };
+
   const getAllSpaceLaunches = useSelector(
-    (state: any) => state.getAllSpaceLaunches
+    (state: GetAllLaunch) => state.getAllSpaceLaunches
   );
   const { loading, allLaunch } = getAllSpaceLaunches;
 
   console.log(allLaunch);
 
   const getSpaceLaunchById = useSelector(
-    (state: any) => state.getSpaceLaunchById
+    (state: GetLaunchById) => state.getSpaceLaunchById
   );
   const { launchById, error } = getSpaceLaunchById;
 
@@ -61,7 +80,7 @@ const LaunchScreen = () => {
       1000
     );
     return () => clearInterval(timer);
-  }, [counter, dispatch]);
+  }, [counter]);
 
   return (
     <>
@@ -69,7 +88,9 @@ const LaunchScreen = () => {
       <Container>
         <InputFieldWrapper matches={matches}>
           <TextField
-            onChange={(e: any) => setId(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setId(e.target.value)
+            }
             label="Search..."
             placeholder="ID"
             sx={{ width: !matches ? '100%' : '50%' }}
@@ -152,7 +173,7 @@ const LaunchScreen = () => {
           {loading ? (
             <Spinner />
           ) : (
-            allLaunch?.map((launch: any) => (
+            allLaunch?.map((launch: Launches) => (
               <Grid
                 container
                 direction="column"
