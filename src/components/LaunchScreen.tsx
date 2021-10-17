@@ -8,9 +8,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Grid, TextField } from '@mui/material';
+import { Grid, TextField, Container } from '@mui/material';
 import moment from 'moment';
-import Clock from 'react-live-clock';
+import { InputFieldWrapper } from '../UIHelpers/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const LaunchScreen = () => {
   const dispatch = useDispatch();
@@ -26,6 +28,10 @@ const LaunchScreen = () => {
     (state: any) => state.getSpaceLaunchById
   );
   const { loading: LaunchLoading, launchById, error } = getSpaceLaunchById;
+
+  const theme = useTheme();
+
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   useEffect(() => {
     dispatch(getAllLaunches());
@@ -53,55 +59,66 @@ const LaunchScreen = () => {
   return (
     <>
       <Header />
-      <Box
-        sx={{
-          width: 500,
-          maxWidth: '100%',
-        }}
-      >
-        <TextField
-          onChange={(e: any) => setId(e.target.value)}
-          fullWidth
-          label="fullWidth"
-          id="fullWidth"
-        />
-        <Button onClick={onClickHandler} variant="outlined">
-          Contained
-        </Button>
-      </Box>
+      <Container>
+        <InputFieldWrapper matches={matches}>
+          <TextField
+            onChange={(e: any) => setId(e.target.value)}
+            label="Search..."
+            placeholder="ID"
+            sx={{ width: !matches ? '100%' : '50%' }}
+          />
+          <Button
+            sx={{
+              height: '3.5rem',
+              marginLeft: matches ? '2rem' : 0,
+              width: !matches ? '10rem' : '10rem',
+              marginTop: !matches ? '1rem' : 0,
+            }}
+            color="info"
+            onClick={onClickHandler}
+            variant="outlined"
+          >
+            Submit
+          </Button>
+        </InputFieldWrapper>
 
-      <Grid container spacing={{ xs: 2, md: 2 }}>
-        {loading ? (
-          <Spinner />
-        ) : (
-          allLaunch?.map((launch: any) => (
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
-              display="flex"
-              key={launch.id}
-              item
-              lg={4}
-              md={6}
-              sm={12}
-              xs={12}
-              // sx={albumStyle}
-            >
-              <Card variant="outlined">
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    {launch.name}
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {launch.id}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))
-        )}
-      </Grid>
+        <Typography variant="h5" component="div">
+          Past Launches
+        </Typography>
+
+        <Grid container spacing={{ xs: 2, md: 2 }}>
+          {loading ? (
+            <Spinner />
+          ) : (
+            allLaunch?.map((launch: any) => (
+              <Grid
+                container
+                direction="column"
+                alignItems="center"
+                display="flex"
+                key={launch.id}
+                item
+                lg={4}
+                md={6}
+                sm={12}
+                xs={12}
+                // sx={albumStyle}
+              >
+                <Card sx={{ width: '100%' }} variant="outlined">
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {launch.name}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      {launch.id}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          )}
+        </Grid>
+      </Container>
     </>
   );
 };

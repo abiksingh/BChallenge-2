@@ -1,11 +1,12 @@
-import { styled } from '@mui/system';
+import styled from 'styled-components';
 
-export const ArticleScreenWrapper = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  marginTop: '10vh',
-});
+export const InputFieldWrapper = styled.div<{ matches: any }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+  flex-direction: ${(props) => (props.matches ? 'row' : 'column')};
+`;
 
 export const typographyStyle = {
   fontWeight: 'bold',
