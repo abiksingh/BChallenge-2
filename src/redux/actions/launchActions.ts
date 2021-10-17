@@ -15,13 +15,17 @@ export const getAllLaunches = () => async (dispatch: Dispatch) => {
       type: GET_LAUNCH_REQUEST,
     });
 
-    const { data } = await axios.get(
+    const { data }: any = await axios.get(
       `https://api.spacexdata.com/v4/launches/past`
+    );
+
+    const launchData = data?.sort((a: string, b: string) =>
+      new Date(a) < new Date(b) ? 1 : -1
     );
 
     dispatch({
       type: GET_LAUNCH_SUCCESS,
-      payload: data,
+      payload: launchData,
     });
   } catch (error: any) {
     dispatch({

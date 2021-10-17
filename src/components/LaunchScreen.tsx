@@ -37,7 +37,7 @@ const LaunchScreen = () => {
 
   type GetLaunchById = {
     getSpaceLaunchById: {
-      error: any;
+      error: string;
       launchById: any;
     };
   };
@@ -52,8 +52,6 @@ const LaunchScreen = () => {
   );
   const { loading, allLaunch } = getAllSpaceLaunches;
 
-  console.log(allLaunch);
-
   const getSpaceLaunchById = useSelector(
     (state: GetLaunchById) => state.getSpaceLaunchById
   );
@@ -63,6 +61,7 @@ const LaunchScreen = () => {
     dispatch(getAllLaunches());
   }, [dispatch]);
 
+  console.log(allLaunch);
   console.log(launchById);
 
   const onClickHandler = () => {
@@ -71,16 +70,16 @@ const LaunchScreen = () => {
     }
   };
 
-  const [counter, setCounter] = useState('');
+  //   const [counter, setCounter] = useState('');
 
-  useEffect(() => {
-    const timer = setInterval(
-      () =>
-        setCounter(moment.utc(launchById?.date_utc).local().format('HH:mm:ss')),
-      1000
-    );
-    return () => clearInterval(timer);
-  }, [counter]);
+  //   useEffect(() => {
+  //     const timer = setInterval(
+  //       () =>
+  //         setCounter(moment.utc(launchById?.date_utc).local().format('HH:mm:ss')),
+  //       1000
+  //     );
+  //     return () => clearInterval(timer);
+  //   }, [counter, launchById?.date_utc, id]);
 
   return (
     <>
@@ -143,7 +142,7 @@ const LaunchScreen = () => {
                       Elapsed Time Since Launch
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {counter}
+                      {/* {counter} */}
                     </Typography>
                   </Grid>
                   <Grid item lg={3} md={3} sm={4} xs={12}>
