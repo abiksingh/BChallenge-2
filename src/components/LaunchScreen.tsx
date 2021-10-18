@@ -38,7 +38,11 @@ const LaunchScreen = () => {
   type GetLaunchById = {
     getSpaceLaunchById: {
       error: string;
-      launchById: any;
+      launchById: {
+        name: string;
+        success: boolean;
+        id: string;
+      };
     };
   };
 
@@ -80,6 +84,8 @@ const LaunchScreen = () => {
   //     );
   //     return () => clearInterval(timer);
   //   }, [counter, launchById?.date_utc, id]);
+
+  console.log(Date.now());
 
   return (
     <>
