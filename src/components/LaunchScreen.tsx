@@ -42,6 +42,8 @@ const LaunchScreen = () => {
         name: string;
         success: boolean;
         id: string;
+        date_utc: string;
+        date_unix: number;
       };
     };
   };
@@ -65,27 +67,31 @@ const LaunchScreen = () => {
     dispatch(getAllLaunches());
   }, [dispatch]);
 
-  console.log(allLaunch);
-  console.log(launchById);
-
   const onClickHandler = () => {
     if (id) {
       dispatch(getLaunchById(id));
     }
   };
 
-  //   const [counter, setCounter] = useState('');
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
-  //   useEffect(() => {
-  //     const timer = setInterval(
-  //       () =>
-  //         setCounter(moment.utc(launchById?.date_utc).local().format('HH:mm:ss')),
-  //       1000
-  //     );
-  //     return () => clearInterval(timer);
-  //   }, [counter, launchById?.date_utc, id]);
+  useEffect(() => {
+    const launchDate = moment(launchById?.date_unix);
+    const todayDate = moment(Date.now());
+    const diff = todayDate.diff(launchDate);
+    const diffDuration = moment.duration(diff);
 
-  console.log(Date.now());
+    const timer = setInterval(() => {
+      setDays(diffDuration.days());
+      setHours(diffDuration.hours());
+      setMinutes(diffDuration.minutes());
+      setSeconds(diffDuration.seconds());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [minutes, seconds, days, hours, launchById?.date_unix]);
 
   return (
     <>
@@ -147,8 +153,9 @@ const LaunchScreen = () => {
                     <Typography sx={{ mb: 1.5 }}>
                       Elapsed Time Since Launch
                     </Typography>
+
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      {/* {counter} */}
+                      {days}Days, {hours}:{minutes}:{seconds}
                     </Typography>
                   </Grid>
                   <Grid item lg={3} md={3} sm={4} xs={12}>
