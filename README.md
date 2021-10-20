@@ -1,8 +1,8 @@
-# BITGRIP Job Application Project
+# Job Application Project
 
 Hey {REPLACE_ME} 😊
 
-thank you for your application for the position as a frontend developer at BITGRIP.
+thank you for your application for the position as a frontend developer at .
 The frontend team builds modern, performant and accessible websites and web applications with the JavaScript library [React](https://reactjs.org/).
 
 **We want you to implement a small project. This task should take approx. two hours: Create a web application, which informs about past SpaceX launches.**
@@ -24,7 +24,6 @@ The frontend team builds modern, performant and accessible websites and web appl
 - An invalid request for a launch ID results in a simple error message on the screen.
   - ![Wireframe for invalid requested launch ID](./wireframes/wireframe-detail-error.png "Wireframe for invalid requested launch ID")
 
-If you have any questions regarding this project, please don't hesitate to contact us.
 
 Happy Coding and Keep Turning Bits Into Smiles 🙌
 
@@ -32,32 +31,15 @@ Happy Coding and Keep Turning Bits Into Smiles 🙌
 
 ### Table of contents
 
-- [Project](#bitgrip-job-application-project)
+- [Project](job-application-project)
 - [Getting started](#getting-started-🚀)
 - [Developing](#developing-💻)
 - [Finishing](#finishing-🏁)
 
 ### Getting started 🚀
 
-This project is bootstrapped with [Create React App](https://create-react-app.dev/), so you have a ready-for-coding boilerplate.
+This project is bootstrapped with [Create React App](https://create-react-app.dev/)
 
 Make sure to install the project dependencies with `npm install`.
 
 Start the project application with `npm start` and visit [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Developing 💻
-
-This boilerplate gives you access to CSS, CSS modules, JavaScript (ES6+) and React out of the box.
-You can add any additional dependency.
-
-Please put all your code inside the `/src` folder, to make the review easier for us.
-
-Please don't touch any files in the root folder nor the `/public` folder.
-
-### Finishing 🏁
-
-You don't need to host this project anywhere, we keep it simple:
-
-1. Remove the `/node_modules` folder and the `/package-lock.json` file.
-2. Compress the project directory into a `.zip` file.
-3. Send the compressed project directory back to us.
